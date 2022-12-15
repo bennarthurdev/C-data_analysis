@@ -10,6 +10,8 @@
 #include <windows.h>
 //Owner Headers
 #include "measures.h"
+#include"reading.h"
+#include "dsfuncs.h"
 
 //Data Struct usada para armazenamento
 typedef struct{
@@ -17,115 +19,26 @@ typedef struct{
     float open, high, low, close, adjclose, volume;
 }Market;
 
-//Data Analysis
-float dataAnalysis(float arrayf[], int n){
-  int i;
-  int choose;
-  //CTM
-  float resultsoma = Array_sum(arrayf, n);
-  float resultmedia = Array_mean(arrayf, n);
-  float resultmediana = Find_median(arrayf, n);
-  //VM
-  float resultvariancia = Array_variance(arrayf, n);
-  float resultdesvio = Array_deviation(resultvariancia);
-  
-  
+int main(){
+  const char* directory = readPath();
+  char path[256];
+  strcpy(path, directory);
+  printf("%s" , path);
+  printf("\nIN PATH: %s\n------------------" , path); 
 
-  
-    printf("\nCHOOSE FOR A STATIC MEASURE:\n 1 - SUM \n 2 - MEAN \n 3 - MEDIAN \n 4 - VARIANCE \n 5 - STD\n 6 - MAX \n 7 - MIN\n ->");
-    scanf("%d" , &choose);
-    switch (choose){
-      case 1:
-          printf("%.2f" , resultsoma);
-          break;
-      case 2:
-           printf("%.2f" , resultmedia);
-          break;
-      case 3:
-           printf("%.2f" , resultmediana);
-           break;
-      case 4:
-           printf("%.2f" , resultvariancia);
-           break;
-      case 5:
-           printf("%.2f" , resultdesvio);
-           break;
-      /*
-      case 6:
-          Array_sort_descres(arrayf, n);
-          
-          break;
-      case 7:
-          Array_sort_cres(arrayf , n);
-          
-          break;
-      */   
-      default:
-          printf("Choose for a valid operation!");
-    }
-}
-  
-
-
-int main()
-{
-  setlocale(LC_ALL, "Portuguese");
-  
+  //READING FILE! BUGS HERE!
   Market estruturadados[100];
-	char filename[1000];
-  //READING DIRECTORY, JUMP THIS BLOCK!
-  ///Declaring Statments
-        DIR *folder;
-        //256 os the "MAX_PATH" limit for mostly Miscrosoft Windows Systems
-        char directory[256];
-        char stock[256];
-        struct dirent *entry; // modify struct of dirent library with atributtes to read info from directory
-        int files = 0;
-        
-        //Reading inputs
-        printf("Type the filepath of stocks: "); //In our example the directory who contain stocks is "Data/Stocks"
-        scanf("%s" , &directory);
-        folder = opendir(directory);
-
-        if(folder == NULL){
-            printf("An error as ocurred while opening directory of data, please try again");
-            return (1);
-        }
-        //
-        else{
-             printf("Choose a stock to read beetween options follow:\n");
-             printf("\nLoading stocks...\n");
-             for(int i = 0 ; i < 10 ; i++){
-                printf("%d..." , i);
-                Sleep(600);
-             };
-             printf("\n");
-             printf("-------------CHOOSE YOUR STOCK----------------\n");
-              while( (entry=readdir(folder)) ){
-                files++;
-                if(files>2){
-                   printf("File %3d: %s \n", (files-2), entry->d_name);
-                }
-               
-             };
-        stock_error:
-        printf("\nChoose for a stock who you want to analyse .csv: ");
-
-        scanf("%s", filename);
-        strcat(directory , "/");
-        strcat(directory, filename);
-        printf("\nIN PATH: %s\n------------------" , directory);
-  
-  
-  //READING FILE!
-  FILE* fp = fopen(directory,"r");
+  FILE* fp = fopen(path,"r");
 	if (!fp){
+    //if fp returns null, so this block of code is executed
 
 		printf("This file don't could be finded\n");
-    goto stock_error;
+
+    //goto stock_error;
     getchar();
     return 0;
     }
+
 	else {
 		char buffer[1000];
 		int row = 0;
@@ -262,9 +175,7 @@ int main()
         break;
       }
     }while(resp == 0);
-        };
-    
-  
-  return 0;
-  }
+  };
+    return 0;
 }
+
