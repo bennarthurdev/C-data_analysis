@@ -30,19 +30,19 @@ float dataAnalysis(float arrayf[], int n){
     scanf("%d" , &choose);
     switch (choose){
       case 1:
-          printf("%.2f" , resultsoma);
+          printf("The sum beetwen the first %d lines is \n-> %.2f\n" ,(n+2), resultsoma);
           break;
       case 2:
-           printf("%.2f" , resultmedia);
+           printf("The mean beetwen the first %d lines is \n-> %.2f\n" ,(n+2), resultmedia);
           break;
       case 3:
-           printf("%.2f" , resultmediana);
+           printf("The median beetwen the first %d lines is \n-> %.2f\n" ,(n+2), resultmediana);
            break;
       case 4:
-           printf("%.2f" , resultvariancia);
+           printf("The variance beetwen the first %d lines is \n-> %.2f\n" ,(n+2),  resultvariancia);
            break;
       case 5:
-           printf("%.2f" , resultdesvio);
+           printf("The standart deviation beetwen the first %d lines is \n-> %.2f\n" ,(n+2),  resultdesvio);
            break;
       /*
       case 6:

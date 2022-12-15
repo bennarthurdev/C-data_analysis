@@ -40,15 +40,18 @@ int main(){
     }
 
 	else {
-		char buffer[1000];
-		int row = 0;
-		int column = 0;
-    int contador = 0;
-    float valorf = 0;
-    int resp = 0;
-    int numcoluna = 0;
-    int rowmax = 0;
+    
+		
     do{
+      char buffer[1000];
+      char buffer[1000];
+		  int row = 0;
+		  int column = 0;
+      int contador = 0;
+      float valorf = 0;
+      int resp = 1;
+      int numcoluna = 0;
+      int rowmax = 0;
       printf("\nEnter with the column who you want analyse\n");
       printf("1-OPEN\n");
       printf("2-HIGH\n");
@@ -127,7 +130,6 @@ int main(){
         for(int j = 0; j <= row ; j++){
           printf("%f\n" , arrayf[j]);
         }
-        
         dataAnalysis(arrayf, row-2);
         break;
       case 2:
@@ -174,7 +176,10 @@ int main(){
         printf("\nInvalid number...");
         break;
       }
-    }while(resp == 0);
+    printf("Do you want to continue? \n[1]-Yes\n[0]-No\n->");
+    scanf("%d" , resp);
+   
+    }while(resp != 0);
   };
     return 0;
 }
